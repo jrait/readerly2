@@ -41,3 +41,31 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     objects = UserManager()
+
+
+class Book(models.Model):
+    title =  models.CharField(max_length = 255)
+    faved_by = models.ManyToManyField(User, related_name = "fav_books")
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+
+
+class Author(models.Model):
+    first_name = models.CharField(max_length = 255)
+    last_name = models.CharField(max_length =255)
+    books = models.ManyToManyField(Book, related_name = "authors")
+    faved_by = models.ManyToManyField(User, related_name = "fav_authors")
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+
+
+class Event(models.Model):
+    name = models.CharField(max_length = 255)
+    location = models.CharField(max_length = 255)
+    desc = models.TextField()
+    time = models.DateTimeField()
+    users_going_to_event = models.ManyToManyField(User, related_name = "events")
+    books_event = models.ManyToManyField(Book, related_name = "events_for_book")
+    authors_event = models.ManyToManyField(Author, related_name = "events_for_author")
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
