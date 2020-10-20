@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <div id="container">
+        <div class='row border-bottom m-3'>
+            <h1 class='col-10'> Welcome {{user.first_name}}!</h1>
+            <a href='/logout' class='col h-50 btn btn-secondary'>Log Out</a>
+        </div>
+
+        <div class="row m-3 border-bottom">
+
+            <div class="col-8">
+
+                <h3>Your Favorite Books:</h3>
+
+                <p>Vangelis rogue kindling the energy hidden in matter vanquish the impossible radio telescope take root and flourish. Not a sunrise but a galaxyrise concept of the number one hundreds of thousands courage of our questions descended from astronomers from which we spring? Dispassionate extraterrestrial observer the sky calls to us a very small stage in a vast cosmic arena the ash of stellar alchemy how far away bits of moving fluff and billions upon billions upon billions upon billions upon billions upon billions upon billions.</p>
+
+            </div>
+
+            <div class="col-4 border-left">
+                <form action="/search_books" method="post">
+                    {% csrf_token %}
+                    <div class="d-flex form-group">
+                        <input name="search_books" value="Search Readerly" type="text" class="form-control">
+                        <button type="submit">GO</button>
+                    </div>
+                </form>
+
+                <a href="/events">View Events Link</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
