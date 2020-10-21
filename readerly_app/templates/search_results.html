@@ -21,18 +21,29 @@
         </div>
 
         <div class="row m-3">
-            
-            <div class="col-8 d-flex flex-wrap">
+            <h3 class='col-lg-6 col-sm-12'>Results for {request.session.search}</h3>
+            <div class="col">
+
+                <form action="/search_books" method="post">
+                    {% csrf_token %}
+                    <div class="d-flex form-group">
+                        <input name="search_books" placeholder="Search Readerly" type="text" class="form-control">
+                        <button type="submit">GO</button>
+                    </div>
+                </form>
+                <a href="/events">View Events Link</a>
+            </div>
+            <div class="col-12 d-flex flex-wrap">
 
                 {% for book in request.session.results.items %}
-                <div class = 'book col-lg-3 col-sm-6 border border-secondary justify-content-center p-2'>
+                <div class = 'book col-lg-3 col-md-4 col-sm-6 col-xl-2 border border-secondary justify-content-center p-2'>
                 <h4>{{book.volumeInfo.title}}</h4>
                 <p class = 'mb-0'>Written By:</p> 
                 {% for author in book.volumeInfo.authors %}
                 <p class = 'm-0'>{{author}}</p>
                 {% endfor %}
-                <img src = '{{book.volumeInfo.imageLinks.thumbnail}}' alt = "image" class = 'mt-3'>
-                <p>{{book.volumeInfo.description}} <a href = {{book.volumeInfo.infoLink}}>Read More</a></p>
+                <img src = '{{book.volumeInfo.imageLinks.thumbnail}}' alt = "No image for {{book.volumeInfo.title}}" class = 'mt-3'>
+                <p class = 'mb-0'>{{book.volumeInfo.description}}</p><a href = {{book.volumeInfo.infoLink}}>Read More</a>
                 <form action = '/add_book' method = 'POST'>
                     {% csrf_token %}
                     <input type = 'hidden' name = 'title' value = '{{book.volumeInfo.title}}'>
@@ -46,23 +57,30 @@
                 {% endfor %}
 
             </div>
-
-            <div class="col-4 border-left border-secondary">
-                <form action="/search_books" method="post">
-                    {% csrf_token %}
-                    <div class="d-flex form-group">
-                        <input name="search_books" placeholder="Search Readerly" type="text" class="form-control">
-                        <button type="submit">GO</button>
-
-                    </div>
-                </form>
-
-                <a href="/events">View Events Link</a>
-            </div>
         </div>
 
 
     </div>
+
+    <script>
+
+        function truncateText(selector, maxLength) {
+            var all_p = document.getElementsByTagName(selector);
+            for (var i = 0; i < all_p.length; i++) {
+                truncated = all_p[i].innerText;
+                console.log(truncated)
+                if (truncated.length > maxLength) {
+                    truncated = truncated.substr(0, maxLength) + '...';
+                }
+                all_p[i].innerText = truncated
+            }
+    
+            return truncated;
+        }
+        truncateText('p', 200)
+    
+    
+    </script>
 </body>
 
 </html>
