@@ -90,3 +90,44 @@ def add_book(request):
         user.fav_books.add(new_book)
         
     return redirect('/dashboard')
+
+
+def show_update_account_page(request,user_id):
+    context = {
+        'user': User.objects.get(id=int(request.session['userid']))
+    }
+    return render(request, 'update_account.html',context)
+
+
+def update_account(request):
+    if request.method == 'POST':
+        user = User.objects.get(id=request.session['userid'])
+        errors = User.objects.update_acct_validator(request.POST)
+        if len(errors) > 0:
+            for key,value in errors.items():
+                messages.error(request,value,extra_tags=key)
+            return redirect(f'/myaccount/{ user.id }')
+        
+        user.first_name = request.POST['update_first_name']
+        user.last_name = request.POST['update_last_name']
+        user.email = request.POST['update_email']
+        user.save()
+        return redirect(f'/myaccount/{ user.id }')
+    else:
+        return redirect('/logout')
+
+
+def update_password(request):
+    if request.method == 'POST':
+        user = User.objects.get(id=request.session['userid'])
+        errors = User.objects.update_pw_validator(request.POST)
+        if len(errors) > 0:
+            for key,value in errors.items():
+                messages.error(request,value,extra_tags=key)
+            return redirect(f'/myaccount/{user.id}')
+        pw = bcrypt.hashpw(request.POST['update_password'].encode(),bcrypt.gensalt()).decode()
+        user.password = pw
+        user.save()
+        return redirect(f'/myaccount/{user.id}')
+    else:
+        return redirect('/logout')

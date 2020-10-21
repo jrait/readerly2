@@ -31,6 +31,25 @@ class UserManager(models.Manager):
         
         return errors
 
+    def update_acct_validator(self,postData):
+        errors={}
+        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+        if len(postData['update_first_name']) == 0:
+            errors['update_first_name'] = 'First Name field cannot be empty!'
+        if len(postData['update_last_name']) == 0:
+            errors['update_last_name'] = 'Last Name field cannot be empty!'
+        if not EMAIL_REGEX.match(postData['update_email']):
+            errors['update_email'] = 'Invalid Email'
+        return errors
+
+    def update_pw_validator(self,postData):
+        errors={}
+        if len(postData['update_password']) < 8:
+            errors['update_password'] = 'New password must be at least 8 characters!'
+        if postData['update_password'] != postData['update_password_confirm']:
+            errors['update_password_confirm'] = 'New passwords do not match!'
+        return errors
+
 
 class User(models.Model):
     first_name = models.CharField(max_length = 255)
