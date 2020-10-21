@@ -17,5 +17,6 @@ Including another URLconf
 from django.urls import path,include
 
 urlpatterns = [
-    path('',include('readerly_app.urls'))
+    path('',include('readerly_app.urls')),
+    path('eventMap/', include('eventsApp.urls'))
 ]
