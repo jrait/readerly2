@@ -33,8 +33,15 @@
                 {% endfor %}
                 <img src = '{{book.volumeInfo.imageLinks.thumbnail}}' alt = "image" class = 'mt-3'>
                 <p>{{book.volumeInfo.description}} <a href = {{book.volumeInfo.infoLink}}>Read More</a></p>
-                
-                <a class = 'btn btn-primary m-2' href = '/add_book/{{book.id}}'>Add to Favorites</a>
+                <form action = '/add_book' method = 'POST'>
+                    {% csrf_token %}
+                    <input type = 'hidden' name = 'title' value = '{{book.volumeInfo.title}}'>
+                    <input type = 'hidden' name = 'author' value = {{book.volumeInfo.authors}}>
+                    <input type = 'hidden' name = 'image' value = {{book.volumeInfo.imageLinks.thumbnail}}>
+                    <input type = 'hidden' name = 'desc' value = '{{book.volumeInfo.description}}'>
+                    <input type = 'hidden' name = 'google_id' value = {{book.id}}>
+                <input type = 'submit' class = 'btn btn-primary m-2' value = "Add to Favorites">
+            </form>
             </div>
                 {% endfor %}
 
