@@ -46,7 +46,7 @@ class User(models.Model):
 class Book(models.Model):
     title =  models.CharField(max_length = 255)
     faved_by = models.ManyToManyField(User, related_name = "fav_books")
-    link = models.Text.Field()
+    link = models.TextField()
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
 
