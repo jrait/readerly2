@@ -90,3 +90,36 @@ def add_book(request):
         user.fav_books.add(new_book)
         
     return redirect('/dashboard')
+
+def remove_book(request,book_id):
+    db_book = Book.objects.get(id = book_id)
+    user = User.objects.get(id = int(request.session['userid']))
+    user.fav_books.remove(db_book)
+    return redirect('/dashboard')
+
+def user_search(request):
+    request.session['search'] = request.POST['search_users']
+    return redirect('/user_search_results')
+
+def user_search_results(request):
+    search_results = request.session['search']
+    list_results = search_results.split()
+    all_items = []
+    for item in list_results:
+        email = User.objects.filter(email = item)
+        first_name = User.objects.filter(first_name = item)
+        last_name = User.objects.filter(last_name =item)
+        if email:
+            all_items.append(email)
+        if first_name:
+            all_items.append(first_name)
+        if last_name:
+            all_items.append(last_name)
+    context = {
+        'results': all_items
+    }
+    return render (request,'user_search.html',context)
+    
+def userpage(request,userid):
+
+    return render(request,'userpage.html')

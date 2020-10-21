@@ -12,4 +12,9 @@ urlpatterns = [
     path('go_back', views.go_back),
     path('search_books_results',views.search_books_results),
     path('add_book',views.add_book),
+    path('remove_book/<int:book_id>',views.remove_book),
+    path('user_search',views.user_search),
+    path('user/<int:userid>',views.userpage),
+    path('user_search_results',views.user_search_results),
+    
 ]
