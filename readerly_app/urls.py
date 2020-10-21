@@ -12,4 +12,7 @@ urlpatterns = [
     path('go_back', views.go_back),
     path('search_books_results',views.search_books_results),
     path('add_book',views.add_book),
+    path('myaccount/<int:user_id>', views.show_update_account_page),
+    path('update_account', views.update_account),
+    path('update_password', views.update_password),
 ]
