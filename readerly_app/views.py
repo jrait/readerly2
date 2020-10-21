@@ -3,6 +3,7 @@ from django.contrib import messages
 from .models import User
 import bcrypt
 from datetime import datetime
+import requests
 
 # Create your views here.
 def index(request):
@@ -53,7 +54,19 @@ def logout(request):
     return redirect('/')
 
 def search_books(request):
-    return render(request, 'search_results.html')
+    if request.POST == '':
+        return redirect('/dashboard')
+    else:
+        search = request.POST['search_books']
+        results = requests.get(f'https://www.googleapis.com/books/v1/volumes?q={search}&maxResults=40')
+        request.session['results'] = results.json()
+    return redirect('/search_books_results')
+
+def search_books_results(request):
+    context = {
+            'results': request.session['results']['items']
+        }
+    return render(request,'search_results.html',context)
 
 def show_events_page(request):
     return render(request, 'events_page.html')
