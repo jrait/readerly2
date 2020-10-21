@@ -13,8 +13,9 @@
 <body>
     <div id="container">
         <div class='row border-bottom m-3'>
-            <h1 class='col-10'> Welcome {{user.first_name}}!</h1>
-            <a href='/logout' class='col h-50 btn btn-secondary'>Log Out</a>
+            <h1 class='col-6'> Welcome {{user.first_name}}!</h1>
+            <a href="/myaccount/{{ user.id }}" class="col-2 h-50 btn btn-secondary">My Account</a>
+            <a href='/logout' class='col-2 h-50 btn btn-secondary'>Log Out</a>
         </div>
 
         <div class="row m-3 border-bottom">
@@ -31,7 +32,7 @@
                 <form action="/search_books" method="post">
                     {% csrf_token %}
                     <div class="d-flex form-group">
-                        <input name="search_books" value="Search Readerly" type="text" class="form-control">
+                        <input name="search_books" placeholder="Search Readerly" type="text" class="form-control">
                         <button type="submit">GO</button>
                     </div>
                 </form>

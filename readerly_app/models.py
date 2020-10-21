@@ -31,6 +31,25 @@ class UserManager(models.Manager):
         
         return errors
 
+    def update_acct_validator(self,postData):
+        errors={}
+        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+        if len(postData['update_first_name']) == 0:
+            errors['update_first_name'] = 'First Name field cannot be empty!'
+        if len(postData['update_last_name']) == 0:
+            errors['update_last_name'] = 'Last Name field cannot be empty!'
+        if not EMAIL_REGEX.match(postData['update_email']):
+            errors['update_email'] = 'Invalid Email'
+        return errors
+
+    def update_pw_validator(self,postData):
+        errors={}
+        if len(postData['update_password']) < 8:
+            errors['update_password'] = 'New password must be at least 8 characters!'
+        if postData['update_password'] != postData['update_password_confirm']:
+            errors['update_password_confirm'] = 'New passwords do not match!'
+        return errors
+
 
 class User(models.Model):
     first_name = models.CharField(max_length = 255)
@@ -41,14 +60,23 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     objects = UserManager()
+    #fav_books - user's favorite books, related to Book
+    #fav_authors - user's favorite authors, related to Author
+    #events - user's attending events, related to Event
 
 
 class Book(models.Model):
     title =  models.CharField(max_length = 255)
+    image_link = models.CharField(max_length = 255)
     faved_by = models.ManyToManyField(User, related_name = "fav_books")
-    link = models.Text.Field()
+    link = models.CharField(max_length = 255)
+    google_id = models.CharField(max_length = 255)
+    desc = models.TextField()
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
+    #authors - book's author, related to Author
+    #events_for_book - related to Event
+
 
 
 class Author(models.Model):
@@ -58,6 +86,7 @@ class Author(models.Model):
     faved_by = models.ManyToManyField(User, related_name = "fav_authors")
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
+    #events_for_author - related to Event
 
 
 class Event(models.Model):
