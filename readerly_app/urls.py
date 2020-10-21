@@ -10,4 +10,5 @@ urlpatterns = [
     path('search_books',views.search_books),
     path('events', views.show_events_page),
     path('go_back', views.go_back),
+    path('search_books_results',views.search_books_results)
 ]
