@@ -41,14 +41,23 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     objects = UserManager()
+    #fav_books - user's favorite books, related to Book
+    #fav_authors - user's favorite authors, related to Author
+    #events - user's attending events, related to Event
 
 
 class Book(models.Model):
     title =  models.CharField(max_length = 255)
+    image_link = models.CharField(max_length = 255)
     faved_by = models.ManyToManyField(User, related_name = "fav_books")
-    link = models.TextField()
+    link = models.CharField(max_length = 255)
+    google_id = models.CharField(max_length = 255)
+    desc = models.TextField()
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
+    #authors - book's author, related to Author
+    #events_for_book - related to Event
+
 
 
 class Author(models.Model):
@@ -58,6 +67,7 @@ class Author(models.Model):
     faved_by = models.ManyToManyField(User, related_name = "fav_authors")
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
+    #events_for_author - related to Event
 
 
 class Event(models.Model):

@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
-from .models import User
+from .models import User,Author,Book,Event
 import bcrypt
 from datetime import datetime
 import requests
@@ -72,4 +72,21 @@ def show_events_page(request):
     return render(request, 'events_page.html')
 
 def go_back(request):
+    return redirect('/dashboard')
+
+def add_book(request):
+    db_book = Book.objects.filter(google_id = request.POST['google_id'])
+    user = User.objects.get(id = int(request.session['userid']))
+    if db_book:
+        user.fav_books.add(db_book[0])
+    else:
+        new_book = Book.objects.create(
+            title = request.POST['title'],
+            image_link = request.POST['image'],
+            google_id = request.POST['google_id'],
+            desc = request.POST['desc'],
+            link = 'https://www.indiebound.org/'
+        )
+        user.fav_books.add(new_book)
+        
     return redirect('/dashboard')
