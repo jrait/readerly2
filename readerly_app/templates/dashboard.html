@@ -13,8 +13,9 @@
 <body>
     <div id="container">
         <div class='row border-bottom m-3'>
-            <h1 class='col-10'> Welcome {{user.first_name}}!</h1>
-            <a href='/logout' class='col h-50 btn btn-secondary'>Log Out</a>
+            <h1 class='col-6'> Welcome {{user.first_name}}!</h1>
+            <a href="/myaccount/{{ user.id }}" class="col-2 h-50 btn btn-secondary">My Account</a>
+            <a href='/logout' class='col-2 h-50 btn btn-secondary'>Log Out</a>
         </div>
 
         <div class='row m-3'>

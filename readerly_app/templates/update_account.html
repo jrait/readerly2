@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Account</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+    <div id="container">
+        <div class='row border-bottom m-3 d-flex justify-content-between'>
+            <h1 class='col-6'>Update My Account:</h1>
+            <a href='/go_back' class='col-2 h-50 btn btn-secondary'>Go Back</a>
+            <a href='/logout' class='col-2 h-50 btn btn-secondary'>Log Out</a>
+        </div>
+        <!--toggle -->
+        <!-- <button type="submit" class="m-4 btn btn-secondary"
+            id="switch">Toggle Dark Mode</button> -->
+        {% if messages %}
+        <div class='messages mt-3'>
+            {% for message in messages %}
+            <div class='alert alert-danger {% if message.tags %} {{message.tags}}{% endif %}'>{{message}}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <div class='row p-3 justify-content-around'>
+            <div class='col-6 bg-secondary rounded p-3'>
+                <h1 class='text-white'>Update Account:</h1>
+
+                <form action='/update_account' method='post'>
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type='text' name='update_first_name' placeholder="First Name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type='text' name='update_last_name' placeholder="Last Name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type='text' name='update_email' placeholder="Email" class="form-control">
+                    </div>
+                    <input type='submit' class='btn btn-primary' value='Submit'>
+                </form>
+            </div>
+
+            <div class='col-4 bg-secondary rounded p-3'>
+                <h1 class='text-white'>Update Password: </h1>
+
+                <form action='/update_password' method='post'>
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type='password' name='update_password' placeholder="New Password Here" class="form-control"></div>
+                    <div class="form-group">
+                        <input type='password' name='update_password_confirm' placeholder="Confirm New Password Here" class="form-control">
+                    </div>
+                    <input type='submit' class='btn btn-primary' value='Submit'>
+                </form>
+            </div>
+        </div>
+</body>
+</html>

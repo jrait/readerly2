@@ -16,5 +16,7 @@ urlpatterns = [
     path('user_search',views.user_search),
     path('user/<int:userid>',views.userpage),
     path('user_search_results',views.user_search_results),
-    
+    path('myaccount/<int:user_id>', views.show_update_account_page),
+    path('update_account', views.update_account),
+    path('update_password', views.update_password),
 ]
