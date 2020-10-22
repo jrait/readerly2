@@ -12,10 +12,17 @@
 
 <body>
     <div id="container">
-        <div class='row border-bottom m-3'>
-            <h1 class='col-6'> Welcome {{user.first_name}}!</h1>
-            <a href="/myaccount/{{ user.id }}" class="col-2 h-50 btn btn-secondary">My Account</a>
-            <a href='/logout' class='col-2 h-50 btn btn-secondary'>Log Out</a>
+
+        <div class="mode">
+            <button id="switch" class="btn btn-dark" onclick="darkLight()">Toggle Dark Mode</button>
+        </div>
+
+        <div class='row d-flex justify-content-between border-bottom m-3'>
+            <h1 class='col-8'> Welcome {{user.first_name}}!</h1>
+            <div class='col-4'>
+                <a href="/myaccount/{{ user.id }}" class="h-50 btn btn-secondary">My Account</a>
+                <a href='/logout' class='h-50 btn btn-secondary'>Log Out</a>
+            </div>
         </div>
 
         <div class="row m-3 border-bottom">
@@ -41,6 +48,10 @@
             </div>
         </div>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    {% load static %}
+    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
 </body>
 
 </html>
