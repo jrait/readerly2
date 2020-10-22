@@ -1,10 +1,11 @@
-$(document).ready(function() {
+$('body').toggleClass(localStorage.toggled);
 
-    // toggle dark mode
-    // $(darkMode() {
-    //     $(".switch").click(function() {
-    //         $("#container").toggleClass(".dark_mode");
-    //     });
-    // });
-
-});
+function darkLight() {
+    if (localStorage.toggled != 'dark_mode') {
+        $('body').toggleClass('dark_mode', true);
+        localStorage.toggled = 'dark_mode';
+    } else {
+        $('body').toggleClass('dark_mode', false);
+        localStorage.toggled = '';
+    }
+}

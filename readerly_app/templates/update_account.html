@@ -13,6 +13,11 @@
 </head>
 
 <body>
+
+    <div class="mode">
+        <button id="switch" class="btn btn-dark" onclick="darkLight()">Toggle Dark Mode</button>
+    </div>
+
     <div id="container">
         <div class='row border-bottom m-3 d-flex justify-content-between'>
             <h1 class='col-6'>Update My Account:</h1>
@@ -62,5 +67,10 @@
                 </form>
             </div>
         </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    {% load static %}
+    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
