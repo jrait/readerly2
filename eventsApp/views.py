@@ -35,3 +35,22 @@ def simpleMap3(request):
     }
 
     return render(request, "map_test3.html", context)   
+
+def eventsMap(request):
+    #renders a google map with clustered pins. Each pin gathers information from the scraped bn.com data stored in the JSON file
+
+    # Read file 
+    f = open('bn_eventData.json')
+    json_string = f.read()
+    f.close()
+
+    # Convert json string to python object
+    import json
+    data = json.loads(json_string)
+    
+    context = {
+        "api_key" : "AIzaSyAIHI0Kl4S-dIqSCgN08vXpqRfhYlOc5FA",
+        "event_data" : data
+    }
+
+    return render(request, "eventsMap.html", context)   

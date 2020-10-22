@@ -62,10 +62,10 @@ class scrapeData(models.Model):
                     "geocode" : extract_lat_long_via_address(event.find("span", attrs={"itemprop" : "postalCode"}).text)
                 }
                 eventArr.append(eventObject)
-            # with open('bn_eventData.json', 'w') as outfile:
-            #     json.dump(eventArr, outfile)
+            with open('bn_eventData.json', 'w') as outfile:
+                json.dump(eventArr, outfile)
         
-        return eventArr
+
 
 
 

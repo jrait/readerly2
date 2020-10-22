@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 body {
     background-color:white;
     color:black;
@@ -9,17 +8,10 @@ body {
     color:white;
 }
 
-=======
->>>>>>> main
 #container {
     max-width:900px;
     height:600px;
-    background-image:url('/static/img/pages.jpeg');
     padding:20px;
     margin: 50px auto;
-<<<<<<< HEAD
     border-radius:5px;
 }
-=======
-}
->>>>>>> main
