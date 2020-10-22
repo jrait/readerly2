@@ -8,10 +8,10 @@ body {
     color:white;
 }
 
-#container {
-    max-width:900px;
-    height:600px;
-    padding:20px;
-    margin: 50px auto;
-    border-radius:5px;
+#viewerCanvas{
+    text-align:center;
+    display:none;
+}
+#hide{
+    display:none;
 }

@@ -155,3 +155,10 @@ def update_password(request):
         return redirect(f'/myaccount/{user.id}')
     else:
         return redirect('/logout')
+
+def book_info(request,book_id):
+    context= {
+        'book':Book.objects.get(id=book_id),
+        'user': User.objects.get(id=int(request.session['userid']))
+    }
+    return render(request,'book_info.html',context)

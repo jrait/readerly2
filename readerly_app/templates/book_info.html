@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Readerly</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <div id="container">
+
+        <div class="mode">
+            <button id="switch" class="btn btn-dark" onclick="darkLight()">Toggle Dark Mode</button>
+        </div>
+
+        <div class='row border-bottom m-3 d-flex justify-content-between'>
+            <h1 class='col-8'>{{book.title}}</h1>
+            <a href='/go_back' class='col-2 h-50 btn btn-secondary'>Home</a>
+            <a href='/logout' class='col-2 h-50 btn btn-secondary'>Log Out</a>
+        </div>
+
+        <div class="row m-3">
+            <h3 class='col-lg-6 col-sm-12'></h3>
+            <div class="col">
+
+                <form action="/search_books" method="post">
+                    {% csrf_token %}
+                    <div class="d-flex form-group">
+                        <input name="search_books" placeholder="Search Readerly" type="text" class="form-control">
+                        <button type="submit">GO</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-12 d-flex flex-wrap ">
+                <div class='col-12 m-3 justify-content-center'>
+                    <div>
+                    <img class = '' src = '{{book.image_link}}' alt = 'No Image available'>
+                </div>
+                    <button id = 'show' class = 'm-2 btn btn-primary'>Show Preview (if Available)</button>
+                    <button id = 'hide' class = 'm-2 btn btn-primary'>Hide Preview</button>
+                    <div class='col-lg-6 col-sm-12 text-warning' id="viewerCanvas" style="height: 75em"></div>
+                    <p id = 'failedLoad'></p>
+                    <p  class='m-3'>{{book.desc}}</p>
+                    
+                    
+                    
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    {% load static %}
+    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+    <script type="text/javascript" src="https://www.google.com/books/jsapi.js"></script>
+    <script type="text/javascript">
+        google.books.load();
+        function failedLoad(){
+            div = document.getElementById('failedLoad');
+            div.innerHTML = "No preview available for {{book.title}}"
+        }
+
+        function initialize() {
+            var viewer = new google.books.DefaultViewer(document.getElementById('viewerCanvas'));
+            viewer.load('{{book.google_id}}',console.log('failure'),console.log('success'));
+            console.log(viewer.isLoaded())
+            viewer.resize()
+        }
+
+        google.books.setOnLoadCallback(initialize);
+        
+
+        function showPreview(){
+            $('#viewerCanvas').show()
+            $('#show').hide()
+            $('#hide').show()
+            initialize();
+            $('img').hide()
+        }
+        $('img').click(function () {
+            showPreview();
+        })
+        $('#show').click(function () {
+            showPreview();
+        })
+
+        $('#hide').click(function(){
+            $('#viewerCanvas').hide()
+            $('img').show()
+            $('#show').show()
+            $('#hide').hide()
+        })
+
+
+    </script>
+
+</body>
+
+</html>
