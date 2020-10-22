@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Search</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <div id="container">
+
+        <div class='row border-bottom m-3 d-flex justify-content-between'>
+            <h1 class='col-7'>Search Results Page</h1>
+            <a href='/go_back' class='col-2 m-2 h-50 btn btn-secondary'>Home</a>
+            <a href='/logout' class='col-2 m-2 h-50 btn btn-secondary'>Log Out</a>
+        </div>
+
+        <div class="row m-3">
+            <h3 class='col-lg-6 col-sm-12'>Results for "{{request.session.search}}"</h3>
+            <div class="col">
+
+                <form action="/user_search" method="post">
+                    {% csrf_token %}
+                    <div class="d-flex form-group">
+                        <input name="search_users" placeholder="Find Users" type="text" class="form-control">
+                        <button type="submit">GO</button>
+                    </div>
+                </form>
+                <a href="/events">View Events Link</a>
+            </div>
+        </div>
+        <div class = 'row m-3 d-flex flex-wrap'>
+        {% for list in results %}
+        {%for user in list %}
+        <div class='col-3 border m-3'>
+            <h4><a href='/user/{{user.id}}'>{{user.first_name.capitalize}} {{user.last_name.capitalize}}</a></h4>
+            <p>Last added: {{user.fav_books.last.title}}</p>
+        </div>
+        {% endfor %}
+        {% endfor %}
+    </div>
+    </body>
+</html>

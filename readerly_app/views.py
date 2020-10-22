@@ -10,7 +10,6 @@ def index(request):
     context = {
         'all_users': User.objects.all()
     }
-
     return render(request,'index.html',context)
 
 def register(request):
@@ -22,9 +21,9 @@ def register(request):
     else:
         pw_hash = bcrypt.hashpw(request.POST['password'].encode(),bcrypt.gensalt()).decode()
         logged_user = User.objects.create(
-            first_name = request.POST['first_name'],
-            last_name = request.POST['last_name'],
-            email = request.POST['email'],
+            first_name = request.POST['first_name'].lower(),
+            last_name = request.POST['last_name'].lower(),
+            email = request.POST['email'].lower(),
             birthday = request.POST['birthday'],
             password = pw_hash)
         request.session['userid'] = logged_user.id
@@ -58,13 +57,15 @@ def search_books(request):
         return redirect('/dashboard')
     else:
         search = request.POST['search_books']
+        request.session['search'] = search
         results = requests.get(f'https://www.googleapis.com/books/v1/volumes?q={search}&maxResults=40')
         request.session['results'] = results.json()
     return redirect('/search_books_results')
 
 def search_books_results(request):
     context = {
-            'results': request.session['results']['items']
+            'results': request.session['results']['items'],
+            'user': User.objects.get(id = int(request.session['userid']))
         }
     return render(request,'search_results.html',context)
 
@@ -91,6 +92,29 @@ def add_book(request):
         
     return redirect('/dashboard')
 
+def remove_book(request,book_id):
+    db_book = Book.objects.get(id = book_id)
+    user = User.objects.get(id = int(request.session['userid']))
+    user.fav_books.remove(db_book)
+    return redirect('/dashboard')
+
+def user_search(request):
+    request.session['search'] = request.POST['search_users']
+    return redirect('/user_search_results')
+
+def user_search_results(request):
+    search_results = User.objects.search(request.session['search'])
+    context = {
+        'results': search_results
+    }
+    return render (request,'user_search.html',context)
+    
+def userpage(request,userid):
+    context = {
+        'page_user': User.objects.get(id = userid),
+        'user':User.objects.get(id = int(request.session['userid'])),
+    }
+    return render(request,'userpage.html',context)
 
 def show_update_account_page(request,user_id):
     context = {

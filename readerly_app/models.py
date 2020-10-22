@@ -50,6 +50,40 @@ class UserManager(models.Manager):
             errors['update_password_confirm'] = 'New passwords do not match!'
         return errors
 
+    def search(self,query):
+        search_results = query
+        list_results = search_results.split()
+        all_items = []
+        for item in list_results:
+            item.lower()
+            email = User.objects.filter(email__contains = item)
+            first_name = User.objects.filter(first_name__contains = item)
+            last_name = User.objects.filter(last_name__contains =item)
+            if email:
+                all_items.append(email)
+            if first_name:
+                for user in first_name:
+                    if all_items:
+                        for each_list in all_items:
+                            if user not in each_list:
+                                all_items.append(first_name)
+                                print(f'first name {item} all clear')
+                            else:
+                                print(f'already found first name {item} !')
+                    else:
+                        all_items.append(first_name)
+            if last_name:
+                for item in last_name:
+                    if all_items:
+                        for each_list in all_items:
+                            if item not in each_list:
+                                print(f'last name {item} all clear')
+                                all_items.append(last_name)
+                            else:
+                                print(f'already found last name {item}!')
+                    else: 
+                        all_items.append(last_name)
+        return all_items
 
 class User(models.Model):
     first_name = models.CharField(max_length = 255)
