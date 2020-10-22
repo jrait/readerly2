@@ -12,7 +12,12 @@
 </head>
 
 <body>
+
     <div id="container">
+
+        <div class="mode">
+            <button id="switch" class="btn btn-dark" onclick="darkLight()">Toggle Dark Mode</button>
+        </div>
 
         <div class='row border-bottom m-3 d-flex justify-content-between'>
             <h1 class='col-7'>Search Results Page</h1>
@@ -31,7 +36,7 @@
                         <button type="submit">GO</button>
                     </div>
                 </form>
-                <a href="/events">View Events Link</a>
+                <a href="/eventMap">View Events Link</a>
             </div>
         </div>
         <div class = 'row m-3 d-flex flex-wrap'>
@@ -44,5 +49,9 @@
         {% endfor %}
         {% endfor %}
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    {% load static %}
+    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
     </body>
 </html>
