@@ -70,7 +70,7 @@ def search_books_results(request):
     return render(request,'search_results.html',context)
 
 def show_events_page(request):
-    return render(request, 'events_page.html')
+    return redirect('/eventsApp/eventMap')
 
 def go_back(request):
     return redirect('/dashboard')
