@@ -10,7 +10,6 @@ def index(request):
     context = {
         'all_users': User.objects.all()
     }
-
     return render(request,'index.html',context)
 
 def register(request):
@@ -22,9 +21,9 @@ def register(request):
     else:
         pw_hash = bcrypt.hashpw(request.POST['password'].encode(),bcrypt.gensalt()).decode()
         logged_user = User.objects.create(
-            first_name = request.POST['first_name'],
-            last_name = request.POST['last_name'],
-            email = request.POST['email'],
+            first_name = request.POST['first_name'].lower(),
+            last_name = request.POST['last_name'].lower(),
+            email = request.POST['email'].lower(),
             birthday = request.POST['birthday'],
             password = pw_hash)
         request.session['userid'] = logged_user.id
@@ -58,13 +57,15 @@ def search_books(request):
         return redirect('/dashboard')
     else:
         search = request.POST['search_books']
+        request.session['search'] = search
         results = requests.get(f'https://www.googleapis.com/books/v1/volumes?q={search}&maxResults=40')
         request.session['results'] = results.json()
     return redirect('/search_books_results')
 
 def search_books_results(request):
     context = {
-            'results': request.session['results']['items']
+            'results': request.session['results']['items'],
+            'user': User.objects.get(id = int(request.session['userid']))
         }
     return render(request,'search_results.html',context)
 
@@ -102,27 +103,18 @@ def user_search(request):
     return redirect('/user_search_results')
 
 def user_search_results(request):
-    search_results = request.session['search']
-    list_results = search_results.split()
-    all_items = []
-    for item in list_results:
-        email = User.objects.filter(email = item)
-        first_name = User.objects.filter(first_name = item)
-        last_name = User.objects.filter(last_name =item)
-        if email:
-            all_items.append(email)
-        if first_name:
-            all_items.append(first_name)
-        if last_name:
-            all_items.append(last_name)
+    search_results = User.objects.search(request.session['search'])
     context = {
-        'results': all_items
+        'results': search_results
     }
     return render (request,'user_search.html',context)
     
 def userpage(request,userid):
-
-    return render(request,'userpage.html')
+    context = {
+        'page_user': User.objects.get(id = userid),
+        'user':User.objects.get(id = int(request.session['userid'])),
+    }
+    return render(request,'userpage.html',context)
 
 def show_update_account_page(request,user_id):
     context = {

@@ -16,12 +16,12 @@
 
         <div class='row border-bottom m-3 d-flex justify-content-between'>
             <h1 class='col-8'>Search Results Page</h1>
-            <a href='/go_back' class='col-2 h-50 btn btn-secondary'>Go Back</a>
+            <a href='/go_back' class='col-2 h-50 btn btn-secondary'>Home</a>
             <a href='/logout' class='col-2 h-50 btn btn-secondary'>Log Out</a>
         </div>
 
         <div class="row m-3">
-            <h3 class='col-lg-6 col-sm-12'>Results for {request.session.search}</h3>
+            <h3 class='col-lg-6 col-sm-12'>Results for "{{request.session.search}}"</h3>
             <div class="col">
 
                 <form action="/search_books" method="post">

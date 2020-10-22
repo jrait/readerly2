@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     {% load static %}
@@ -13,9 +14,9 @@
 <body>
     <div id="container">
         <div class='row border-bottom m-3'>
-            <h1 class='col-6'> Welcome {{user.first_name}}!</h1>
-            <a href="/myaccount/{{ user.id }}" class="col-2 h-50 btn btn-secondary">My Account</a>
-            <a href='/logout' class='col-2 h-50 btn btn-secondary'>Log Out</a>
+            <h1 class='col-7'> Welcome {{user.first_name.capitalize}}!</h1>
+            <a href="/myaccount/{{ user.id }}" class="col-2 m-2 h-50 btn btn-secondary">My Account</a>
+            <a href='/logout' class='col-2 m-2 h-50 btn btn-secondary'>Log Out</a>
         </div>
 
         <div class='row m-3'>
@@ -38,26 +39,27 @@
                 </form>
                 <a href="/events">View Events Link</a>
             </div>
-            <div class="row m-3 border-bottom">
+        </div>
+        <div class="row m-3 border-bottom">
 
-                <div class="col d-flex flex-wrap">
+            <div class="col d-flex flex-wrap">
 
 
-                    {% for book in user.fav_books.all %}
-                    <div class='book col-lg-3 col-md-4 col-sm-6 col-xl-2 border border-secondary justify-content-center p-2'>
+                {% for book in user.fav_books.all %}
+                <div class='book col-lg-3 col-md-4 col-sm-6 col-xl-2 border border-secondary justify-content-center p-2'>
 
-                        <img class='ml-4' src={{book.image_link}} alt='No image found for {{book.title}}'>
-                        <h4 class='mt-2 border-bottom'>{{book.title}}</h4>
-                        <p class='h-auto m-2'>{{book.desc}}</p>
-                        
-                        <a class = 'btn btn-danger' href = '/remove_book/{{book.id}}'>Remove from Favorites</a>
-                    </div>
-                    {% endfor %}
+                    <img class='ml-4' src={{book.image_link}} alt='No image found for {{book.title}}'>
+                    <h4 class='mt-2 border-bottom'>{{book.title}}</h4>
+                    <p class='h-auto m-2'>{{book.desc}}</p>
 
+                    <a class='btn btn-danger' href='/remove_book/{{book.id}}'>Remove from Favorites</a>
                 </div>
+                {% endfor %}
 
             </div>
+
         </div>
+    </div>
     </div>
 </body>
 <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
