@@ -15,3 +15,7 @@ body {
 #hide{
     display:none;
 }
+
+.author{
+    list-style-type: none;
+}

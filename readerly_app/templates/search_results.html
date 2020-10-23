@@ -51,7 +51,9 @@
                 <form action = '/add_book' method = 'POST'>
                     {% csrf_token %}
                     <input type = 'hidden' name = 'title' value = '{{book.volumeInfo.title}}'>
-                    <input type = 'hidden' name = 'author' value = {{book.volumeInfo.authors}}>
+                    
+                    <input type = 'hidden' name = 'author' value = '{{book.volumeInfo.authors}}'>
+                   
                     <input type = 'hidden' name = 'image' value = {{book.volumeInfo.imageLinks.thumbnail}}>
                     <input type = 'hidden' name = 'desc' value = '{{book.volumeInfo.description}}'>
                     <input type = 'hidden' name = 'google_id' value = {{book.id}}>

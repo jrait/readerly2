@@ -114,8 +114,7 @@ class Book(models.Model):
 
 
 class Author(models.Model):
-    first_name = models.CharField(max_length = 255)
-    last_name = models.CharField(max_length =255)
+    name = models.CharField(max_length = 255)
     books = models.ManyToManyField(Book, related_name = "authors")
     faved_by = models.ManyToManyField(User, related_name = "fav_authors")
     created_at = models.DateTimeField(auto_now_add = True)

@@ -1,5 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -26,7 +25,16 @@
         </div>
 
         <div class="row m-3">
-            <h3 class='col-lg-6 col-sm-12'></h3>
+            <div class='col-lg-6 col-sm-12'>
+                <h3>
+                    Written By: </h3>
+                <ul>
+                    {% for author in book.authors.all %}
+
+                    <li class='author'>{{author.name}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
             <div class="col">
 
                 <form action="/search_books" method="post">
@@ -40,68 +48,68 @@
             <div class="col-12 d-flex flex-wrap ">
                 <div class='col-12 m-3 justify-content-center'>
                     <div>
-                    <img class = '' src = '{{book.image_link}}' alt = 'No Image available'>
-                </div>
-                    <button id = 'show' class = 'm-2 btn btn-primary'>Show Preview (if Available)</button>
-                    <button id = 'hide' class = 'm-2 btn btn-primary'>Hide Preview</button>
+                        <img class='' src='{{book.image_link}}' alt='No Image available'>
+                    </div>
+                    <button id='show' class='m-2 btn btn-primary'>Show Preview (if Available)</button>
+                    <button id='hide' class='m-2 btn btn-primary'>Hide Preview</button>
                     <div class='col-lg-6 col-sm-12 text-warning' id="viewerCanvas" style="height: 75em"></div>
-                    <p id = 'failedLoad'></p>
-                    <p  class='m-3'>{{book.desc}}</p>
-                    
-                    
-                    
+                    <p id='failedLoad'></p>
+                    <p class='m-3'>{{book.desc}}</p>
 
+
+
+
+                </div>
             </div>
+
+
         </div>
 
 
-    </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        {% load static %}
+        <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+        <script type="text/javascript" src="https://www.google.com/books/jsapi.js"></script>
+        <script type="text/javascript">
+            google.books.load();
+            function failedLoad() {
+                div = document.getElementById('failedLoad');
+                div.innerHTML = "No preview available for {{book.title}}"
+            }
+
+            function initialize() {
+                var viewer = new google.books.DefaultViewer(document.getElementById('viewerCanvas'));
+                viewer.load('{{book.google_id}}', console.log('failure'), console.log('success'));
+                console.log(viewer.isLoaded())
+                viewer.resize()
+            }
+
+            google.books.setOnLoadCallback(initialize);
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    {% load static %}
-    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
-    <script type="text/javascript" src="https://www.google.com/books/jsapi.js"></script>
-    <script type="text/javascript">
-        google.books.load();
-        function failedLoad(){
-            div = document.getElementById('failedLoad');
-            div.innerHTML = "No preview available for {{book.title}}"
-        }
+            function showPreview() {
+                $('#viewerCanvas').show()
+                $('#show').hide()
+                $('#hide').show()
+                initialize();
+                $('img').hide()
+            }
+            $('img').click(function () {
+                showPreview();
+            })
+            $('#show').click(function () {
+                showPreview();
+            })
 
-        function initialize() {
-            var viewer = new google.books.DefaultViewer(document.getElementById('viewerCanvas'));
-            viewer.load('{{book.google_id}}',console.log('failure'),console.log('success'));
-            console.log(viewer.isLoaded())
-            viewer.resize()
-        }
-
-        google.books.setOnLoadCallback(initialize);
-        
-
-        function showPreview(){
-            $('#viewerCanvas').show()
-            $('#show').hide()
-            $('#hide').show()
-            initialize();
-            $('img').hide()
-        }
-        $('img').click(function () {
-            showPreview();
-        })
-        $('#show').click(function () {
-            showPreview();
-        })
-
-        $('#hide').click(function(){
-            $('#viewerCanvas').hide()
-            $('img').show()
-            $('#show').show()
-            $('#hide').hide()
-        })
+            $('#hide').click(function () {
+                $('#viewerCanvas').hide()
+                $('img').show()
+                $('#show').show()
+                $('#hide').hide()
+            })
 
 
-    </script>
+        </script>
 
 </body>
 
