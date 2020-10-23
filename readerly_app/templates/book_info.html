@@ -61,7 +61,15 @@
 
                 </div>
             </div>
-
+            <div class = 'p-2'>
+                <h4>Faved By:</h4>
+                <ul>
+                {% for user in book.faved_by.all %}
+                
+                <li class = 'author p-2'><a href = '/user/{{user.id}}'>{{user.first_name.capitalize}} {{user.last_name.capitalize}}</a></li>
+                {% endfor %}
+            </ul>
+            </div>
 
         </div>
 
