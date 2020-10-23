@@ -53,14 +53,14 @@ def logout(request):
     return redirect('/')
 
 def search_books(request):
-    if request.POST == '':
+    if len(request.POST['search_books'])<1:
         return redirect('/dashboard')
     else:
         search = request.POST['search_books']
         request.session['search'] = search
         results = requests.get(f'https://www.googleapis.com/books/v1/volumes?q={search}&maxResults=40')
         request.session['results'] = results.json()
-    return redirect('/search_books_results')
+        return redirect('/search_books_results')
 
 def search_books_results(request):
     context = {
@@ -120,8 +120,11 @@ def remove_book(request,book_id):
     return redirect('/dashboard')
 
 def user_search(request):
-    request.session['search'] = request.POST['search_users']
-    return redirect('/user_search_results')
+    if len(request.POST['search_users'])<1:
+        return redirect('/dashboard')
+    else:
+        request.session['search'] = request.POST['search_users']
+        return redirect('/user_search_results')
 
 def user_search_results(request):
     search_results = User.objects.search(request.session['search'])
