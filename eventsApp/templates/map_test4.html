@@ -1,0 +1,113 @@
+<!-- this is a test - uses the geocoded locations taken from the webscraped data in the JSON file -->
+<!-- Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates (like latitude 37.423021 and longitude -122.083739), which you can use to place markers on a map, or position the map.The Geocoding API provides a direct way to access these services via an HTTP request. -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Events</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style5.css' %}">
+
+    <script src="https://maps.googleapis.com/maps/api/js?key={{api_key}}&callback=initMap&libraries=&v=weekly"
+        defer></script>
+    <script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
+
+
+
+</head>
+
+<body>
+    <div id="navbar">
+        <h3>Readerly: Events</h3>
+
+        <!-- Coffitivity webplayer -->
+        <div>
+            Browsing Audio:
+            <div id="coffitivity">
+
+                <iframe scrolling="no" frameborder="no" allow="autoplay"
+                    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/115630581&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+
+            </div>
+        </div>
+
+        <a href=''>Back</a>
+    </div>
+
+    <div id="wrapper">
+
+        <!--The div element for the map -->
+        <div id="map"></div>
+        <div id="my_body"><h4>List of events pinned on the map:</h4>
+        
+        </div>
+    </div>
+</body>
+
+<script>
+    // Initialize and add the map
+    function initMap() {
+        const center = { lat: 40.760870, lng: -73.997494 };
+
+        // The map, centered at UCB
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 2,
+            center: center,
+        });
+
+        // Create an array of alphabetical characters used to label the markers.
+        const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        // Add some markers to the map.
+        // Note: The code uses the JavaScript Array.prototype.map() method to
+        // create an array of markers based on a given "locations" array.
+        // The map() method here has nothing to do with the Google Maps API.
+        const markers = locations.map((location, i) => {
+            return new google.maps.Marker({
+                position: location,
+                label: labels[i % labels.length],
+            });
+        });
+
+
+
+
+        // Add a marker clusterer to manage the markers.
+        new MarkerClusterer(map, markers, {
+            imagePath:
+                "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
+        });
+    }
+
+
+
+
+    const locations = [
+        {% for event in event_data %}
+            {
+                lat: {{ event.geocode.0 }},
+                lng: {{ event.geocode.1 }}
+            },
+        {% endfor %}]
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+</script>
+
+</html>
