@@ -10,7 +10,6 @@ def index(request):
     context = {
         'all_users': User.objects.all()
     }
-
     return render(request,'index.html',context)
 
 def register(request):
@@ -22,9 +21,9 @@ def register(request):
     else:
         pw_hash = bcrypt.hashpw(request.POST['password'].encode(),bcrypt.gensalt()).decode()
         logged_user = User.objects.create(
-            first_name = request.POST['first_name'],
-            last_name = request.POST['last_name'],
-            email = request.POST['email'],
+            first_name = request.POST['first_name'].lower(),
+            last_name = request.POST['last_name'].lower(),
+            email = request.POST['email'].lower(),
             birthday = request.POST['birthday'],
             password = pw_hash)
         request.session['userid'] = logged_user.id
@@ -58,18 +57,20 @@ def search_books(request):
         return redirect('/dashboard')
     else:
         search = request.POST['search_books']
+        request.session['search'] = search
         results = requests.get(f'https://www.googleapis.com/books/v1/volumes?q={search}&maxResults=40')
         request.session['results'] = results.json()
     return redirect('/search_books_results')
 
 def search_books_results(request):
     context = {
-            'results': request.session['results']['items']
+            'results': request.session['results']['items'],
+            'user': User.objects.get(id = int(request.session['userid']))
         }
     return render(request,'search_results.html',context)
 
 def show_events_page(request):
-    return render(request, 'events_page.html')
+    return redirect('/eventsApp/eventMap')
 
 def go_back(request):
     return redirect('/dashboard')
@@ -77,8 +78,10 @@ def go_back(request):
 def add_book(request):
     db_book = Book.objects.filter(google_id = request.POST['google_id'])
     user = User.objects.get(id = int(request.session['userid']))
+    
     if db_book:
         user.fav_books.add(db_book[0])
+        
     else:
         new_book = Book.objects.create(
             title = request.POST['title'],
@@ -88,9 +91,50 @@ def add_book(request):
             link = 'https://www.indiebound.org/'
         )
         user.fav_books.add(new_book)
-        
+        print(request.POST['author'])
+        authors = request.POST['author']
+        authors = authors.replace("[","")
+        authors = authors.replace("]","")
+        authors = authors.replace("'","")
+        authors_list = authors.split(",")
+        print(f"splits up authors {authors_list}")
+        for author in authors_list:
+            print(author)
+            author_check = Author.objects.filter(name = author)
+            if author_check:
+                author_check[0].books.add(new_book)
+            else:
+                print("add author")
+                new_author = Author.objects.create(
+                    name = author,
+                )
+                new_book.authors.add(new_author)
+            
     return redirect('/dashboard')
 
+def remove_book(request,book_id):
+    db_book = Book.objects.get(id = book_id)
+    user = User.objects.get(id = int(request.session['userid']))
+    user.fav_books.remove(db_book)
+    return redirect('/dashboard')
+
+def user_search(request):
+    request.session['search'] = request.POST['search_users']
+    return redirect('/user_search_results')
+
+def user_search_results(request):
+    search_results = User.objects.search(request.session['search'])
+    context = {
+        'results': search_results
+    }
+    return render (request,'user_search.html',context)
+    
+def userpage(request,userid):
+    context = {
+        'page_user': User.objects.get(id = userid),
+        'user':User.objects.get(id = int(request.session['userid'])),
+    }
+    return render(request,'userpage.html',context)
 
 def show_update_account_page(request,user_id):
     context = {
@@ -131,3 +175,10 @@ def update_password(request):
         return redirect(f'/myaccount/{user.id}')
     else:
         return redirect('/logout')
+
+def book_info(request,book_id):
+    context= {
+        'book':Book.objects.get(id=book_id),
+        'user': User.objects.get(id=int(request.session['userid']))
+    }
+    return render(request,'book_info.html',context)

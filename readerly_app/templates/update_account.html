@@ -8,20 +8,23 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'scss/style.css' %}">
 
 </head>
 
 <body>
+
+    <div class="mode">
+        <button id="switch" class="btn btn-dark" onclick="darkLight()">Toggle Dark Mode</button>
+    </div>
+
     <div id="container">
         <div class='row border-bottom m-3 d-flex justify-content-between'>
             <h1 class='col-6'>Update My Account:</h1>
             <a href='/go_back' class='col-2 h-50 btn btn-secondary'>Go Back</a>
             <a href='/logout' class='col-2 h-50 btn btn-secondary'>Log Out</a>
         </div>
-        <!--toggle -->
-        <!-- <button type="submit" class="m-4 btn btn-secondary"
-            id="switch">Toggle Dark Mode</button> -->
+        
         {% if messages %}
         <div class='messages mt-3'>
             {% for message in messages %}
@@ -36,13 +39,13 @@
                 <form action='/update_account' method='post'>
                     {% csrf_token %}
                     <div class="form-group">
-                        <input type='text' name='update_first_name' placeholder="First Name" class="form-control">
+                        <input type='text' name='update_first_name' placeholder="First Name" class="form-control" value = '{{user.first_name}}'>
                     </div>
                     <div class="form-group">
-                        <input type='text' name='update_last_name' placeholder="Last Name" class="form-control">
+                        <input type='text' name='update_last_name' placeholder="Last Name" class="form-control" value = '{{user.last_name}}'>
                     </div>
                     <div class="form-group">
-                        <input type='text' name='update_email' placeholder="Email" class="form-control">
+                        <input type='text' name='update_email' placeholder="Email" class="form-control" value = '{{user.email}}'>
                     </div>
                     <input type='submit' class='btn btn-primary' value='Submit'>
                 </form>
@@ -62,5 +65,10 @@
                 </form>
             </div>
         </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    {% load static %}
+    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
 </body>
 </html>

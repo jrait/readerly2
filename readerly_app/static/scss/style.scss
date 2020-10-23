@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Playfair+Display:wght@500&display=swap');
+
+@import "./variables";
+@import "./register";
+@import "./login";
+
+#container {
+    background:$thirdColor;
+}
+
+#logo {
+    margin:50px;
+}
+
+button {
+    background:$textLight;
+    border-radius:10%;
+}
+
+.dark_mode {
+    background-color:black;
+    color:white;
+}

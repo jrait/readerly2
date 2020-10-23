@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'scss/style.css' %}">
+</head>
+
+<body>
+    <div id="container p-3">
+        <div class='row border-bottom m-3 d-flex justify-content-between'>
+            <h1 class='col-8'>{{page_user.first_name.capitalize}} {{page_user.last_name.capitalize}}'s Favorite Books
+            </h1>
+            <a href='/go_back' class='col-2 h-50 btn btn-secondary'>Home</a>
+            <a href='/logout' class='col-2 h-50 btn btn-secondary'>Log Out</a>
+        </div>
+        <div class='row d-flex flex-wrap m-3'>
+
+            {% for book in page_user.fav_books.all %}
+            <div class='book col-lg-3 col-md-4 col-sm-6 col-xl-2 border border-secondary justify-content-center p-2'>
+
+                <img class='ml-4' src={{book.image_link}} alt='No image found for {{book.title}}'>
+                <h4 class='mt-2 border-bottom'><a class = 'm-2'href = '/book_info/{{book.id}}'>{{book.title}}</a></h4>
+                <p class='h-auto p-2 mb-0'>{{book.desc}}</p>
+                <a class = 'mb-3' href = '/book_info/{{book.id}}'>Read More</a>
+                {% if book in user.fav_books.all %}
+                <a class='mt-4 btn btn-danger' href='/remove_book/{{book.id}}'>Remove from Favorites</a>
+                {% else %}
+                <form action='/add_book' method='post'>
+                    {% csrf_token %}
+                    <input type='hidden' name='google_id' value={{book.google_id}}>
+                    <input class='mt-4 btn btn-primary' type='submit' value='Add to Favorites'>
+                </form>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <a href="/eventMap">View Events Link</a>
+        </div>
+    </div>
+
+    <script>
+
+        function truncateText(selector, maxLength) {
+            var all_p = document.getElementsByTagName(selector);
+            for (var i = 0; i < all_p.length; i++) {
+                truncated = all_p[i].innerText;
+                console.log(truncated)
+                if (truncated.length > maxLength) {
+                    truncated = truncated.substr(0, maxLength) + '...';
+                }
+                all_p[i].innerText = truncated
+            }
+
+            return truncated;
+        }
+        truncateText('p', 200)
+
+
+    </script>
+</body>
+
+</html>

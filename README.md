@@ -13,7 +13,7 @@ Our web application has 4 main pages. We have a login & registration page that v
 Our team used Django to build the database and website structure. APIs used were Google Books, Google Maps, and Google Geocode. 
 
 ## Challenges we ran into
-Git errors - initally we ran into many git conflicts that forced us to start a new Git repo. Learning APIs was also a learning curve.
+Git errors - initally we ran into many git conflicts that forced us to start a new Git repo. Learning APIs was also a learning curve. Using the webscraper had some difficulties of making too many URL requests and grabbing unwanted characters from the text that needed to be manually cleaned afterwards.
 
 ## Accomplishments that we're proud of
 We had great communication and checked in with each other regularly to keep to our list of goals. We are very proud to have created this site as our first project to display what we have learned thus far in the curriculum and what we were able to teach ourselves in our journey to become self-sufficient developers. We were getting along very well under the tight deadline and everyone was able to contribute to the project.
