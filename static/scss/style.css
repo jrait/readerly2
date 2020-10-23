@@ -1,6 +1,37 @@
-#header {
-  max-height: 100vh;
-  background: blue; }
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Playfair+Display:wght@500&display=swap");
+#register, #login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  background: #e29578;
+  color: #495057; }
+  #register p, #login p {
+    font-family: "Montserrat", sans-serif; }
+  #register h1, #login h1 {
+    font-family: "Playfair Display", serif;
+    margin: 50px 0px; }
+  #register form, #login form {
+    max-width: 700px; }
+
+#login {
+  background: #006d77; }
+  #login h1 {
+    color: #ced4da; }
+  #login #form {
+    max-width: 700px; }
+
+#container {
+  background: #ffddd2; }
+
+#logo {
+  margin: 50px; }
+
+button {
+  background: #ced4da;
+  border-radius: 10%; }
 
 .dark_mode {
   background-color: black;
