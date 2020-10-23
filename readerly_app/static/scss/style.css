@@ -77,4 +77,16 @@ button {
 .dark_mode a {
   color: #ced4da;
 }
+
+#viewerCanvas{
+  text-align:center;
+  display:none;
+}
+#hide{
+  display:none;
+}
+
+.author{
+  list-style-type: none;
+}
 /*# sourceMappingURL=style.css.map */
