@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 # from . import bn_eventData.json
 from eventsApp.models import *
 
@@ -34,11 +34,10 @@ def simpleMap3(request):
         "event_data" : data
     }
 
-    return render(request, "map_test3.html", context)   
+    return render(request, "map_test3.html", context)  
 
-def eventsMap(request):
-    #renders a google map with clustered pins. Each pin gathers information from the scraped bn.com data stored in the JSON file
-
+def simpleMap4(request):
+    #renders a map to test custom icons, map popups
     # Read file 
     f = open('bn_eventData.json')
     json_string = f.read()
@@ -52,5 +51,27 @@ def eventsMap(request):
         "api_key" : "AIzaSyAIHI0Kl4S-dIqSCgN08vXpqRfhYlOc5FA",
         "event_data" : data
     }
+    return render(request, "map_test4.html", context)
 
-    return render(request, "eventsMap.html", context)   
+def eventsMap(request):
+    #renders a google map with clustered pins. Each pin gathers information from the scraped bn.com data stored in the JSON file
+
+    # Read file 
+    f = open('bn_eventData_cleaned.json')
+    json_string = f.read()
+    f.close()
+
+    # Convert json string to python object
+    import json
+    data = json.loads(json_string)
+    
+    context = {
+        "api_key" : "AIzaSyAIHI0Kl4S-dIqSCgN08vXpqRfhYlOc5FA",
+        "event_data" : data
+    }
+
+    return render(request, "eventsMap.html", context)  
+
+def newScrape(request):
+    scrapeData.createObject()
+    return redirect('/simpleMap4')
