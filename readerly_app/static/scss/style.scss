@@ -4,9 +4,22 @@
 @import "./variables";
 @import "./register";
 @import "./login";
+@import "./dashboard";
 
-#container {
+body {
+    background:$firstColor;
+
+    a {
+        color:$textDark;
+    }
+}
+
+#header {
     background:$thirdColor;
+}
+
+#wrapper {
+    background:$secondColor;
 }
 
 #logo {
@@ -19,6 +32,9 @@ button {
 }
 
 .dark_mode {
-    background-color:black;
-    color:white;
+    background-color:$darkMode;
+    color:$textLight;
+    a {
+        color:$textLight;
+    }
 }

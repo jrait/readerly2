@@ -14,14 +14,20 @@
 <body>
     <div id="container">
 
+        <div id="header">
+            {% load static %}
+            <img id="logo" src="{% static 'img/navy_logo.png' %}" alt="Readerly Logo">
+        </div>
+
         <div class="mode">
             <button id="switch" class="btn btn-dark" onclick="darkLight()">Toggle Dark Mode</button>
         </div>
 
         <div class='row border-bottom m-3 d-flex justify-content-between'>
             <h1 class='col-8'>{{book.title}}</h1>
-            <a href='/go_back' class='col-2 h-50 btn btn-secondary'>Home</a>
-            <a href='/logout' class='col-2 h-50 btn btn-secondary'>Log Out</a>
+            <a href="/eventMap" class="col-1 h-50 btn btn-secondary">Events Page</a>
+            <a href='/go_back' class='col-1 h-50 btn btn-secondary'>Home</a>
+            <a href='/logout' class='col-1 h-50 btn btn-secondary'>Log Out</a>
         </div>
 
         <div class="row m-3">
@@ -50,8 +56,8 @@
                     <div>
                         <img class='' src='{{book.image_link}}' alt='No Image available'>
                     </div>
-                    <button id='show' class='m-2 btn btn-primary'>Show Preview (if Available)</button>
-                    <button id='hide' class='m-2 btn btn-primary'>Hide Preview</button>
+                    <button id='show' class='m-2 btn btn-info'>Show Preview (if Available)</button>
+                    <button id='hide' class='m-2 btn btn-info'>Hide Preview</button>
                     <div class='col-lg-6 col-sm-12 text-warning' id="viewerCanvas" style="height: 75em"></div>
                     <p id='failedLoad'></p>
                     <p class='m-3'>{{book.desc}}</p>

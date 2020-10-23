@@ -13,12 +13,24 @@
 
 <body>
     <div id="container p-3">
+
+        <div id="header">
+            {% load static %}
+            <img id="logo" src="{% static 'img/navy_logo.png' %}" alt="Readerly Logo">
+        </div>
+
+        <div class="mode">
+            <button id="switch" class="btn btn-dark" onclick="darkLight()">Toggle Dark Mode</button>
+        </div>
+
         <div class='row border-bottom m-3 d-flex justify-content-between'>
             <h1 class='col-8'>{{page_user.first_name.capitalize}} {{page_user.last_name.capitalize}}'s Favorite Books
-            </h1>
-            <a href='/go_back' class='col-2 h-50 btn btn-secondary'>Home</a>
-            <a href='/logout' class='col-2 h-50 btn btn-secondary'>Log Out</a>
+            </h1>            
+            <a href="/eventMap" class="col-1 h-50 btn btn-secondary">Events Page</a>
+            <a href='/go_back' class='col-1 h-50 btn btn-secondary'>Home</a>
+            <a href='/logout' class='col-1 h-50 btn btn-secondary'>Log Out</a>
         </div>
+
         <div class='row d-flex flex-wrap m-3'>
 
             {% for book in page_user.fav_books.all %}
@@ -29,19 +41,22 @@
                 <p class='h-auto p-2 mb-0'>{{book.desc}}</p>
                 <a class = 'mb-3' href = '/book_info/{{book.id}}'>Read More</a>
                 {% if book in user.fav_books.all %}
-                <a class='mt-4 btn btn-danger' href='/remove_book/{{book.id}}'>Remove from Favorites</a>
+                <a class='mt-4 btn btn-warning text-dark' href='/remove_book/{{book.id}}'>Remove from Favorites</a>
                 {% else %}
                 <form action='/add_book' method='post'>
                     {% csrf_token %}
                     <input type='hidden' name='google_id' value={{book.google_id}}>
-                    <input class='mt-4 btn btn-primary' type='submit' value='Add to Favorites'>
+                    <input class='mt-4 btn btn-info' type='submit' value='Add to Favorites'>
                 </form>
                 {% endif %}
             </div>
             {% endfor %}
-            <a href="/eventMap">View Events Link</a>
         </div>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    {% load static %}
+    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
 
     <script>
 

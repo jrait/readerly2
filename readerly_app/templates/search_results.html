@@ -14,14 +14,20 @@
 <body>
     <div id="container">
 
+        <div id="header">
+            {% load static %}
+            <img id="logo" src="{% static 'img/navy_logo.png' %}" alt="Readerly Logo">
+        </div>
+
         <div class="mode">
             <button id="switch" class="btn btn-dark" onclick="darkLight()">Toggle Dark Mode</button>
         </div>
 
         <div class='row border-bottom m-3 d-flex justify-content-between'>
             <h1 class='col-8'>Search Results Page</h1>
-            <a href='/go_back' class='col-2 h-50 btn btn-secondary'>Home</a>
-            <a href='/logout' class='col-2 h-50 btn btn-secondary'>Log Out</a>
+            <a href="/eventMap" class="col-1 h-50 btn btn-secondary">Events Page</a>
+            <a href='/go_back' class='col-1 h-50 btn btn-secondary'>Home</a>
+            <a href='/logout' class='col-1 h-50 btn btn-secondary'>Log Out</a>
         </div>
 
         <div class="row m-3">
@@ -57,7 +63,7 @@
                     <input type = 'hidden' name = 'image' value = {{book.volumeInfo.imageLinks.thumbnail}}>
                     <input type = 'hidden' name = 'desc' value = '{{book.volumeInfo.description}}'>
                     <input type = 'hidden' name = 'google_id' value = {{book.id}}>
-                <input type = 'submit' class = 'btn btn-primary m-2' value = "Add to Favorites">
+                <input type = 'submit' class = 'btn btn-info m-2' value = "Add to Favorites">
             </form>
             </div>
                 {% endfor %}

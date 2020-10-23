@@ -14,10 +14,12 @@
 
 
 <body>
-    
+
     <div id="container">
-        {% load static %}
-        <img id="logo" src="{% static 'img/navy_logo.png' %}" alt="Readerly Logo">
+        <div id="header">
+            {% load static %}
+            <img id="logo" src="{% static 'img/navy_logo.png' %}" alt="Readerly Logo">
+        </div>
         <div id="register">
             {% if messages %}
             <div class='messages mt-3'>
