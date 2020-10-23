@@ -78,8 +78,10 @@ def go_back(request):
 def add_book(request):
     db_book = Book.objects.filter(google_id = request.POST['google_id'])
     user = User.objects.get(id = int(request.session['userid']))
+    
     if db_book:
         user.fav_books.add(db_book[0])
+        
     else:
         new_book = Book.objects.create(
             title = request.POST['title'],
@@ -89,7 +91,25 @@ def add_book(request):
             link = 'https://www.indiebound.org/'
         )
         user.fav_books.add(new_book)
-        
+        print(request.POST['author'])
+        authors = request.POST['author']
+        authors = authors.replace("[","")
+        authors = authors.replace("]","")
+        authors = authors.replace("'","")
+        authors_list = authors.split(",")
+        print(f"splits up authors {authors_list}")
+        for author in authors_list:
+            print(author)
+            author_check = Author.objects.filter(name = author)
+            if author_check:
+                author_check[0].books.add(new_book)
+            else:
+                print("add author")
+                new_author = Author.objects.create(
+                    name = author,
+                )
+                new_book.authors.add(new_author)
+            
     return redirect('/dashboard')
 
 def remove_book(request,book_id):

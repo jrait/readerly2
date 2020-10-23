@@ -56,8 +56,15 @@
                 <div class='book col-lg-3 col-md-4 col-sm-6 col-xl-2 border border-secondary justify-content-center p-2'>
 
                     <img class='ml-4' src={{book.image_link}} alt='No image found for {{book.title}}'>
-                    <h4 class='mt-2 border-bottom'><a class = 'm-2'href = '/book_info/{{book.id}}'>{{book.title}}</a></h4>
-                    <p class='h-auto m-2'>{{book.desc}}</p>
+                    <h4 class='mt-2 border-bottom'><a class = ''href = '/book_info/{{book.id}}'>{{book.title}}</a></h4>
+                    <p class = 'mb-0'>Written by:</p>
+                    <ul class ="list-group">
+                        {% for author in book.authors.all %}
+                        <li class = 'author'>{{author.name}}</li>
+                        {% endfor %}
+                    </ul>
+                    
+                    <p class='h-auto m-3'>{{book.desc}}</p>
                     <a class = 'm-2'href = '/book_info/{{book.id}}'>Read More</a>
                     <a class='mt-4 btn btn-danger' href='/remove_book/{{book.id}}'>Remove from Favorites</a>
                 </div>
