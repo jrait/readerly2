@@ -15,14 +15,20 @@
 
     <div id="container">
 
+        <div id="header">
+            {% load static %}
+            <img id="logo" src="{% static 'img/navy_logo.png' %}" alt="Readerly Logo">
+        </div>
+        
         <div class="mode">
             <button id="switch" class="btn btn-dark" onclick="darkLight()">Toggle Dark Mode</button>
         </div>
 
         <div class='row border-bottom m-3 d-flex justify-content-between'>
-            <h1 class='col-7'>Search Results Page</h1>
-            <a href='/go_back' class='col-2 m-2 h-50 btn btn-secondary'>Home</a>
-            <a href='/logout' class='col-2 m-2 h-50 btn btn-secondary'>Log Out</a>
+            <h1 class='col-8'>Search Results Page</h1>
+            <a href="/eventMap" class="col-1 h-50 btn btn-secondary">Events Page</a>
+            <a href='/go_back' class='col-1 h-50 btn btn-secondary'>Home</a>
+            <a href='/logout' class='col-1 h-50 btn btn-secondary'>Log Out</a>
         </div>
 
         <div class="row m-3">
@@ -36,7 +42,7 @@
                         <button type="submit">GO</button>
                     </div>
                 </form>
-                <a href="/eventMap">View Events Link</a>
+
             </div>
         </div>
         <div class = 'row m-3 d-flex flex-wrap'>
