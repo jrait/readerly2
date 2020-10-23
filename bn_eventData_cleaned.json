@@ -1,0 +1,146 @@
+[
+    {
+        "title": "Biography/History Book Group",
+        "genres": "Book Group",
+        "datetime": "Wednesday October 21, 2020",
+        "streetAddress": "\n      \n        1 Worcester Rd\n",
+        "city": "Framingham",
+        "state": "MA",
+        "postalCode": "01701",
+        "geocode": [
+            42.3240042,
+            -71.4536835
+        ]
+    },
+    {
+        "title": "Storytime",
+        "genres": "Storytime",
+        "datetime": "Thursday October 22, 2020",
+        "streetAddress": "\n      \n        Staples Plaza\n      \n      \n          444A Broadway\n",
+        "city": "Saugus",
+        "state": "MA",
+        "postalCode": "01906",
+        "geocode": [
+            42.4681642,
+            -71.014118
+        ]
+    },
+    {
+        "title": "Storytime in the Kids' Department",
+        "genres": "Storytime",
+        "datetime": "Saturday October 24, 2020",
+        "streetAddress": "\n      \n        Watertower Plaza\n      \n      \n          120 Watertower Plaza\n",
+        "city": "Leominster",
+        "state": "MA",
+        "postalCode": "01453",
+        "geocode": [
+            42.52334339999999,
+            -71.7385225
+        ]
+    },
+    {
+        "title": "VIRTUAL EVENT AT 4 PM EST: Live studio tour with Jeff Kinney, to celebrate the newest Wimpy Kid book, THE DEEP END!",
+        "genres": "Virtual Event,\u00a0Author Event,\u00a0Special Event",
+        "datetime": "Saturday October 24, 2020",
+        "streetAddress": "\n      \n        150 Granite St\n",
+        "city": "Braintree",
+        "state": "MA",
+        "postalCode": "02184",
+        "geocode": [
+            42.2020445,
+            -71.014118
+        ]
+    },
+    {
+        "title": "VIRTUAL EVENT AT 4 PM EST: Live studio tour with Jeff Kinney, to celebrate the newest Wimpy Kid book, THE DEEP END!",
+        "genres": "Virtual Event,\u00a0Author Event,\u00a0Special Event",
+        "datetime": "Saturday October 24, 2020",
+        "streetAddress": "\n      \n        98 Middlesex Turnpike\n",
+        "city": "Burlington",
+        "state": "MA",
+        "postalCode": "01803",
+        "geocode": [
+            42.50057229999999,
+            -71.20426189999999
+        ]
+    },
+    {
+        "title": "VIRTUAL EVENT AT 4 PM EST: Live studio tour with Jeff Kinney, to celebrate the newest Wimpy Kid book, THE DEEP END!",
+        "genres": "Virtual Event,\u00a0Author Event,\u00a0Special Event",
+        "datetime": "Saturday October 24, 2020",
+        "streetAddress": "\n      \n        The Derby Street Shoppes\n      \n      \n          96 Derby Street Suite 300\n",
+        "city": "Hingham",
+        "state": "MA",
+        "postalCode": "02043",
+        "geocode": [
+            42.2271881,
+            -70.8833434
+        ]
+    },
+    {
+        "title": "VIRTUAL EVENT AT 4 PM EST: Live studio tour with Jeff Kinney, to celebrate the newest Wimpy Kid book, THE DEEP END!",
+        "genres": "Virtual Event,\u00a0Author Event,\u00a0Special Event",
+        "datetime": "Saturday October 24, 2020",
+        "streetAddress": "\n      \n        Stallbrook Marketplace\n      \n      \n          270 Hartford Avenue\n",
+        "city": "Bellingham",
+        "state": "MA",
+        "postalCode": "02019",
+        "geocode": [
+            42.0874065,
+            -71.46555649999999
+        ]
+    },
+    {
+        "title": "VIRTUAL EVENT AT 4 PM EST: Live studio tour with Jeff Kinney, to celebrate the newest Wimpy Kid book, THE DEEP END!",
+        "genres": "Virtual Event,\u00a0Author Event,\u00a0Special Event",
+        "datetime": "Saturday October 24, 2020",
+        "streetAddress": "\n      \n        The Shoppes at Blackstone Valley\n      \n      \n          70 Worcester Providence Turnpike #5\n",
+        "city": "Millbury",
+        "state": "MA",
+        "postalCode": "01527",
+        "geocode": [
+            42.1805434,
+            -71.7978333
+        ]
+    },
+    {
+        "title": "VIRTUAL EVENT AT 4 PM EST: Live studio tour with Jeff Kinney, to celebrate the newest Wimpy Kid book, THE DEEP END!",
+        "genres": "Virtual Event,\u00a0Author Event,\u00a0Special Event",
+        "datetime": "Saturday October 24, 2020",
+        "streetAddress": "\n      \n        The Crossings at Smithfield\n      \n      \n          371 Putnam Pike  Suite 330\n",
+        "city": "Smithfield",
+        "state": "RI",
+        "postalCode": "02917",
+        "geocode": [
+            41.9036825,
+            -71.51304449999999
+        ]
+    },
+    {
+        "title": "VIRTUAL EVENT AT 4 PM EST: Live studio tour with Jeff Kinney, to celebrate the newest Wimpy Kid book, THE DEEP END!",
+        "genres": "Virtual Event,\u00a0Author Event,\u00a0Special Event",
+        "datetime": "Saturday October 24, 2020",
+        "streetAddress": "\n      \n        1741 South Willow Street\n",
+        "city": "Manchester",
+        "state": "NH",
+        "postalCode": "03103",
+        "geocode": [
+            42.9561485,
+            -71.4418101
+        ]
+    },
+    {
+        "title": "Biography/History Book Group",
+        "genres": "Book Group",
+        "datetime": "Wednesday October 21, 2020",
+        "streetAddress": "\n      \n        1 Worcester Rd\n",
+        "city": "Framingham",
+        "state": "MA",
+        "postalCode": "01701",
+        "geocode": [
+            42.3240042,
+            -71.4536835
+        ]
+    }
+    
+]

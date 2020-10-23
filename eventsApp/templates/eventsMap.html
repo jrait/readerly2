@@ -5,92 +5,143 @@
 <html>
 
 <head>
-    <title>Events</title>
-    
+    <title>Add Map</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'style5.css' %}">
-    
     <script src="https://maps.googleapis.com/maps/api/js?key={{api_key}}&callback=initMap&libraries=&v=weekly"
         defer></script>
     <script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
-
-
-
+    <script
+        src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
 </head>
 
 <body>
-<div id="navbar">
-    <h3>Readerly: Events</h3>
+    <div id="navbar">
+        <h3>Readerly: Events</h3>
 
-    <!-- Coffitivity webplayer -->
-    <div>
-    Browsing Audio: 
-    <div id="coffitivity">
+        <!-- Coffitivity webplayer -->
+        <div>
+            Browsing Audio:
+            <div id="coffitivity">
 
-        <iframe scrolling="no" frameborder="no" allow="autoplay"
-            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/115630581&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+                <iframe scrolling="no" frameborder="no" allow="autoplay"
+                    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/115630581&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
 
-    </div></div>
+            </div>
+        </div>
 
-    <a href=''>Back</a>
-</div>
+        <a href='/'>Back</a>
+    </div>
 
     <div id="wrapper">
-    
-
-
-
-
     <!--The div element for the map -->
     <div id="map"></div>
-    <div id="my_body">List of events pinned on the map:</div>
-    </div>
+    <h2>List of events pinned on the map:</h2>
+    <div id="my_body">
+
+        {% for event in event_data %}
+        <p>
+        <h4>{{event.title}}</h4>
+        </p>
+        <p>{{event.genres}}</p>
+        <p>{{event.datetime}}</p>
+        <p>{{event.streetAddress}}</p>
+        <p>{{event.city}}, {{event.state}} {{event.postalCode}}</p>
+        <br>
+        {% endfor %}
+
+    </div></div>
 </body>
 
 <script>
     // Initialize and add the map
     function initMap() {
-        // The location of Uluru
-        const uluru = { lat: -25.344, lng: 131.036 };
-        const ucb = { lat: 40.760870, lng: -73.997494 };
 
-        // The map, centered at UCB
-        const map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 2,
-            center: ucb,
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 2, center: { lat: 42.3601, lng: -71.0589 }
         });
 
-        // Create an array of alphabetical characters used to label the markers.
-        const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        /////////////////////////////////////////////////////////////
+        var markers = [
+            {% for event in event_data %}
+    {
+        coords: { lat: {{ event.geocode.0 }}, lng: {{ event.geocode.1 }} },
+        content: "{{event.datetime}} {{event.title}}"
+    },
+    {% endfor %}
+        ];
 
-        // Add some markers to the map.
-        // Note: The code uses the JavaScript Array.prototype.map() method to
-        // create an array of markers based on a given "locations" array.
-        // The map() method here has nothing to do with the Google Maps API.
-        const markers = locations.map((location, i) => {
-            return new google.maps.Marker({
-                position: location,
-                label: labels[i % labels.length],
-            });
-        });
+    ///////////////////////////////////////////////////////////////////
+    // var markers = [
+    //     {
+    //         coords: { lat: -31.56391, lng: 147.154312 },
+    //         iconImage: 'http://maps.google.com/mapfiles/kml/pushpin/pink-pushpin.png',
+    //         content: "hello, this is a test window"
+    //     },
+    //     {
+    //         coords: { lat: -33.851702, lng: 151.216968 },
+    //         iconImage: 'http://maps.google.com/mapfiles/kml/pushpin/pink-pushpin.png',
+    //         content: "hello, this is another test window"
+    //     },
+    //     {
+    //         coords: {lat: 44.407034, lng: 8.936372},
+    //         iconImage: 'http://maps.google.com/mapfiles/kml/pushpin/pink-pushpin.png',
+    //         content: "hello, this is another another test window"
+    //     }
+    //     ];
 
-        // Add a marker clusterer to manage the markers.
-        new MarkerClusterer(map, markers, {
-            imagePath:
-                "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
-        });
+        // // create an array of all your markers
+        const marker_list = [];
+
+    //loop through markers
+    for (var i = 0; i < markers.length; i++) {
+        addMarker(markers[i], marker_list);
     }
 
-    const locations = [
-        {% for event in event_data %}
-    {
-        lat: {{ event.geocode.0 }},
-        lng: {{ event.geocode.1 }}
-    },
-    {% endfor %}]
 
+    function addMarker(props, marker_list) {
+        var marker = new google.maps.Marker({
+            position: props.coords,
+            map: map,
+        });
+        marker.setIcon('http://maps.google.com/mapfiles/kml/pushpin/pink-pushpin.png');
+
+        //sets a custom icon picture if entered
+        if (props.iconImage) {
+            marker.setIcon(props.iconImage);
+        }
+
+        //checks if any content is in the marker
+        if (props.content) {
+            var infoWindow = new google.maps.InfoWindow({
+                content: props.content
+            });
+
+            marker.addListener('click', function () {
+                infoWindow.open(map, marker);
+            });
+        }
+
+        marker_list.push(marker);
+
+
+    }
+
+
+
+    // Path for cluster icons to be appended (1.png, 2.png, etc.)
+    const imagePath = "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m";
+
+    // Enable marker clustering for this map and these markers
+    const markerClusterer = new MarkerClusterer(map, marker_list, { imagePath: imagePath });
+
+
+
+
+
+    }
 
 
 

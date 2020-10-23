@@ -38,6 +38,12 @@ body{
     background-blend-mode: lighten;
 }
 
+h2{
+    color:white;
+    padding: 4px;
+}
+
+
 #wrapper{
     display: flex;
     flex-direction: column;
@@ -67,4 +73,12 @@ body{
     text-overflow: ellipsis; 
     font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;
     font-weight: 100;
+}
+
+#my_body{
+    height: 200px;
+    width: 500px;
+    background-color: gray;
+    overflow: scroll;
+    margin: 0 auto;
 }
