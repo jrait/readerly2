@@ -78,10 +78,11 @@ def go_back(request):
 def add_book(request):
     db_book = Book.objects.filter(google_id = request.POST['google_id'])
     user = User.objects.get(id = int(request.session['userid']))
-    
+    #check if book is already in database
+    #if book exists within database, add to current user
     if db_book:
         user.fav_books.add(db_book[0])
-        
+    #Otherwise, create book object in DB and add to current user
     else:
         new_book = Book.objects.create(
             title = request.POST['title'],
@@ -91,20 +92,20 @@ def add_book(request):
             link = 'https://www.indiebound.org/'
         )
         user.fav_books.add(new_book)
-        print(request.POST['author'])
+        #Convert author data from 1 string to a list of strings
         authors = request.POST['author']
         authors = authors.replace("[","")
         authors = authors.replace("]","")
         authors = authors.replace("'","")
         authors_list = authors.split(",")
-        print(f"splits up authors {authors_list}")
+        #check each author in list to see if it's in the DB
         for author in authors_list:
-            print(author)
             author_check = Author.objects.filter(name = author)
+            #if author already exists, add book
             if author_check:
                 author_check[0].books.add(new_book)
+            #Otherwise, create author and add book to author
             else:
-                print("add author")
                 new_author = Author.objects.create(
                     name = author,
                 )
