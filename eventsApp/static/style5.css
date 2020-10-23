@@ -1,46 +1,49 @@
+
+
 *{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
-    border: 1px dashed hotpink;
+    margin: 0;
 }
 
 #navbar{
     width: 100%;    /* The width is the width of the web page */
     height: 80px;
-    background-color: aquamarine;
+    background-color: #006d77;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     padding: 6px;
+    color: #ced4da;
 }
 
 h3{
-    font-size: 30px;;
+    font-size: 30px;
 }
 
 #navbar a{
-    height: 30px;
+    height: 20px;
     width: 60px;
     text-decoration: none;
-    background-color: gray;
-    color: white;
+    background-color: #ffddd2;
+    color: #006d77;
     text-align: center;
     padding: 5px;
     border-radius: 5px;
 }
 
+#navbar h3{
+    display: flex;
+    align-items: center;
+}
+
 body{
-    background-image: url("https://images.pexels.com/photos/757855/pexels-photo-757855.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260");
-    background-size: contain;
-    background-repeat: none;
-    background-blend-mode: lighten;
+    background-color: #e29578;
 }
 
 h2{
-    color:white;
+    color:#ffddd2;
     padding: 4px;
+    font-size: 30px;
+    margin: 0;
 }
 
 
@@ -55,7 +58,7 @@ h2{
     height: 400px;
     /* The height is 400 pixels */
     width: 800px;
-    border: 7px solid aquamarine;
+    border: 7px solid #006d77;
     border-radius: 30px;
     margin: 10px 0;
 
@@ -78,7 +81,15 @@ h2{
 #my_body{
     height: 200px;
     width: 500px;
-    background-color: gray;
+    background-color: #ffddd2;
+    color:#006d77;
     overflow: scroll;
     margin: 0 auto;
+    text-align: center;
+    border-radius: 10px;
+}
+
+#audioplayer{
+    display: flex;
+    align-items: center;
 }

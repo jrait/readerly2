@@ -5,7 +5,7 @@
 <html>
 
 <head>
-    <title>Add Map</title>
+    <title>Events Map</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'style5.css' %}">
     <script src="https://maps.googleapis.com/maps/api/js?key={{api_key}}&callback=initMap&libraries=&v=weekly"
@@ -18,12 +18,17 @@
 </head>
 
 <body>
+   
     <div id="navbar">
-        <h3>Readerly: Events</h3>
+        <h3><img id="logo" src="{% static 'pink_logo.png' %}" alt="Readerly Logo">Events</h3>
 
-        <!-- Coffitivity webplayer -->
-        <div>
-            Browsing Audio:
+
+
+        <div id="audioplayer">
+            <a href='/dashboard'>Back</a>
+            <!-- Coffitivity webplayer -->
+
+            
             <div id="coffitivity">
 
                 <iframe scrolling="no" frameborder="no" allow="autoplay"
@@ -31,28 +36,28 @@
 
             </div>
         </div>
-
-        <a href='/'>Back</a>
     </div>
 
+
     <div id="wrapper">
-    <!--The div element for the map -->
-    <div id="map"></div>
-    <h2>List of events pinned on the map:</h2>
-    <div id="my_body">
+        <!--The div element for the map -->
+        <div id="map"></div>
+        <h2>List of events:</h2>
+        <div id="my_body">
 
-        {% for event in event_data %}
-        <p>
-        <h4>{{event.title}}</h4>
-        </p>
-        <p>{{event.genres}}</p>
-        <p>{{event.datetime}}</p>
-        <p>{{event.streetAddress}}</p>
-        <p>{{event.city}}, {{event.state}} {{event.postalCode}}</p>
-        <br>
-        {% endfor %}
+            {% for event in event_data %}
+            <p>
+            <h4>{{event.title}}</h4>
+            </p>
+            <p>{{event.genres}}</p>
+            <p>{{event.datetime}}</p>
+            <p>{{event.streetAddress}}</p>
+            <p>{{event.city}}, {{event.state}} {{event.postalCode}}</p>
+            <br>
+            {% endfor %}
 
-    </div></div>
+        </div>
+    </div>
 </body>
 
 <script>
@@ -92,8 +97,8 @@
     //     }
     //     ];
 
-        // // create an array of all your markers
-        const marker_list = [];
+    // // create an array of all your markers
+    const marker_list = [];
 
     //loop through markers
     for (var i = 0; i < markers.length; i++) {
