@@ -1,0 +1,24 @@
+@mixin flexCenter($direction, $background, $text) {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    flex-direction: $direction;
+    background: $background;
+    color: $text;
+}
+
+#register {
+    @include flexCenter(column, $secondColor, $textDark);
+
+    p {
+        font-family:$infoFont;
+    }
+    h1{
+        font-family:$headerFont;
+        margin:50px 0px;
+    }
+    form {
+        max-width:700px;
+    }
+}
