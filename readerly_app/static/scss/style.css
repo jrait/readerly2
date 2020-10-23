@@ -16,7 +16,7 @@
       -ms-flex-direction: column;
           flex-direction: column;
   background: #e29578;
-  color: #495057;
+  color: #17191b;
 }
 
 #register p, #login p {
@@ -44,8 +44,20 @@
   max-width: 700px;
 }
 
-#container {
+body {
+  background: #006d77;
+}
+
+body a {
+  color: #17191b;
+}
+
+#header {
   background: #ffddd2;
+}
+
+#wrapper {
+  background: #e29578;
 }
 
 #logo {
@@ -58,18 +70,11 @@ button {
 }
 
 .dark_mode {
-  background-color: black;
-  color: white;
-}
-#viewerCanvas{
-  text-align:center;
-  display:none;
-}
-#hide{
-  display:none;
+  background-color: #17191b;
+  color: #ced4da;
 }
 
-.author{
-  list-style-type: none;
+.dark_mode a {
+  color: #ced4da;
 }
 /*# sourceMappingURL=style.css.map */

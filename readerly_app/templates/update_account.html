@@ -14,13 +14,20 @@
 
 <body>
 
+    <div id="container">
+
+    <div id="header">
+        {% load static %}
+        <img id="logo" src="{% static 'img/navy_logo.png' %}" alt="Readerly Logo">
+    </div>
+
     <div class="mode">
         <button id="switch" class="btn btn-dark" onclick="darkLight()">Toggle Dark Mode</button>
     </div>
 
     <div id="container">
         <div class='row border-bottom m-3 d-flex justify-content-between'>
-            <h1 class='col-6'>Update My Account:</h1>
+            <h1 class='col-6'>My Account</h1>
             <a href='/go_back' class='col-2 h-50 btn btn-secondary'>Go Back</a>
             <a href='/logout' class='col-2 h-50 btn btn-secondary'>Log Out</a>
         </div>
@@ -47,7 +54,7 @@
                     <div class="form-group">
                         <input type='text' name='update_email' placeholder="Email" class="form-control" value = '{{user.email}}'>
                     </div>
-                    <input type='submit' class='btn btn-primary' value='Submit'>
+                    <input type='submit' class='btn btn-info' value='Submit'>
                 </form>
             </div>
 
@@ -61,10 +68,11 @@
                     <div class="form-group">
                         <input type='password' name='update_password_confirm' placeholder="Confirm New Password Here" class="form-control">
                     </div>
-                    <input type='submit' class='btn btn-primary' value='Submit'>
+                    <input type='submit' class='btn btn-info' value='Submit'>
                 </form>
             </div>
         </div>
+    </div>
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
