@@ -61,4 +61,15 @@ button {
   background-color: black;
   color: white;
 }
+#viewerCanvas{
+  text-align:center;
+  display:none;
+}
+#hide{
+  display:none;
+}
+
+.author{
+  list-style-type: none;
+}
 /*# sourceMappingURL=style.css.map */
