@@ -6,6 +6,8 @@ cffi==1.14.3
 chardet==3.0.4
 Django==2.2.4
 django-appconf==1.0.4
+django-sass==1.0.0
+django-sass-processor==0.8.2
 idna==2.10
 libsass==0.20.1
 pycparser==2.20
