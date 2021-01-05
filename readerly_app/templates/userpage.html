@@ -26,7 +26,7 @@
         <div class='row border-bottom m-3 d-flex justify-content-between'>
             <h1 class='col-8'>{{page_user.first_name.capitalize}} {{page_user.last_name.capitalize}}'s Favorite Books
             </h1>            
-            <a href="/eventMap" class="col-1 h-50 btn btn-secondary">Events Page</a>
+            <!-- <a href="/eventMap" class="col-1 h-50 btn btn-secondary">Events Page</a> -->
             <a href='/go_back' class='col-1 h-50 btn btn-secondary'>Home</a>
             <a href='/logout' class='col-1 h-50 btn btn-secondary'>Log Out</a>
         </div>
@@ -39,7 +39,7 @@
                 <img class='ml-4' src={{book.image_link}} alt='No image found for {{book.title}}'>
                 <h4 class='mt-2 border-bottom'><a class = 'm-2'href = '/book_info/{{book.id}}'>{{book.title}}</a></h4>
                 <p class='h-auto p-2 mb-0'>{{book.desc}}</p>
-                <a class = 'mb-3' href = '/book_info/{{book.id}}'>Read More</a>
+                <p><a class = 'mb-3' href = '/book_info/{{book.id}}'>Read More</a></p>
                 {% if book in user.fav_books.all %}
                 <a class='mt-4 btn btn-warning text-dark' href='/remove_book/{{book.id}}'>Remove from Favorites</a>
                 {% else %}

@@ -18,7 +18,9 @@
   background: #e29578;
   color: #17191b;
 }
-
+*{
+  color:whitesmoke
+}
 #register p, #login p {
   font-family: "Montserrat", sans-serif;
 }
@@ -49,7 +51,7 @@ body {
 }
 
 body a {
-  color: #17191b;
+  color: #ffddd2;
 }
 
 #header {
