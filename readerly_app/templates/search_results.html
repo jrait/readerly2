@@ -25,7 +25,7 @@
 
         <div class='row border-bottom m-3 d-flex justify-content-between'>
             <h1 class='col-8'>Search Results Page</h1>
-            <a href="/eventMap" class="col-1 h-50 btn btn-secondary">Events Page</a>
+            <!-- <a href="/eventMap" class="col-1 h-50 btn btn-secondary">Events Page</a> -->
             <a href='/go_back' class='col-1 h-50 btn btn-secondary'>Home</a>
             <a href='/logout' class='col-1 h-50 btn btn-secondary'>Log Out</a>
         </div>
@@ -41,7 +41,7 @@
                         <button type="submit">GO</button>
                     </div>
                 </form>
-                <a href="/eventMap">View Events Link</a>
+
             </div>
             <div class="col-12 d-flex flex-wrap">
 
@@ -53,7 +53,8 @@
                 <p class = 'm-0'>{{author}}</p>
                 {% endfor %}
                 <img src = '{{book.volumeInfo.imageLinks.thumbnail}}' alt = "No image for {{book.volumeInfo.title}}" class = 'mt-3'>
-                <p class = 'mb-0'>{{book.volumeInfo.description}}</p><a href = {{book.volumeInfo.infoLink}}>Read More</a>
+                <p class = 'mb-0'>{{book.volumeInfo.description}}</p>
+                <div><a href = {{book.volumeInfo.infoLink}}>Read More</a></div>
                 <form action = '/add_book' method = 'POST'>
                     {% csrf_token %}
                     <input type = 'hidden' name = 'title' value = '{{book.volumeInfo.title}}'>

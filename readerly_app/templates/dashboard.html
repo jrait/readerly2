@@ -27,7 +27,7 @@
 
             <div class='row border-bottom m-3 d-flex justify-content-between'>
                 <h1 class='col-8'> Welcome {{user.first_name.capitalize}}!</h1>
-                <a href="/eventMap" class="col-1 h-50 btn btn-secondary">Events Page</a>
+                <!-- <a href="/eventMap" class="col-1 h-50 btn btn-secondary">Events Page</a> -->
                 <a href='/go_back' class='col-1 h-50 btn btn-secondary'>Home</a>
                 <a href='/logout' class='col-1 h-50 btn btn-secondary'>Log Out</a>
             </div>
@@ -71,7 +71,7 @@
                         </ul>
 
                         <p class='h-auto m-3'>{{book.desc}}</p>
-                        <a class='m-2' href='/book_info/{{book.id}}'>Read More</a>
+                        <div><a class='m-2' href='/book_info/{{book.id}}'>Read More</a></div>
                         <a class='mt-4 btn btn-warning text-dark' href='/remove_book/{{book.id}}'>Remove from Favorites</a>
                     </div>
                     {% endfor %}
