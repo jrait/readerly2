@@ -7,23 +7,23 @@ class UserManager(models.Manager):
     def validator(self,postData):
         errors = {}
         today = datetime.now()
-        if not postData['birthday']:
-            errors['birthday'] = "Birthday is required!"
-        else: 
-            birthday = datetime.strptime(postData['birthday'], '%Y-%m-%d')
-            if birthday > today:
-                errors['future_baby'] = "Birthday must be in the past!"
-            elif (today - birthday).days < 4745:
-                errors['age'] = "User must be at least 13 years old"
-        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-        if len(postData['first_name'])<2:
-            errors['first_name'] = "First name must be 2 or more characters!"
-        if len(postData['last_name'])<2:
-            errors['last_name'] = "Last name must be 2 or more characters!"
-        if not EMAIL_REGEX.match(postData['email']):
-            errors['email'] = "Invalid email address!"
+        # if not postData['birthday']:
+        #     errors['birthday'] = "Birthday is required!"
+        # else: 
+        #     birthday = datetime.strptime(postData['birthday'], '%Y-%m-%d')
+        #     if birthday > today:
+        #         errors['future_baby'] = "Birthday must be in the past!"
+        #     elif (today - birthday).days < 4745:
+        #         errors['age'] = "User must be at least 13 years old"
+        # EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+        if len(postData['first_name'])<1:
+            errors['first_name'] = "First name is required"
+        if len(postData['last_name'])<1:
+            errors['last_name'] = "Last name is required"
+        if len(postData['email'])<1:
+            errors['email'] = "Username is required"
         if len(postData['password'])<8:
-            errors['password'] = "Password must be 8 or more characters!"
+            errors['password'] = "Password must be 8 or more characters"
         if postData['password'] != (postData['password2']):
             errors['password_match'] = "Passwords do not match!"
         if len(User.objects.filter(email = postData['email'])) > 0:
@@ -33,13 +33,15 @@ class UserManager(models.Manager):
 
     def update_acct_validator(self,postData):
         errors={}
-        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+        # EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
         if len(postData['update_first_name']) == 0:
             errors['update_first_name'] = 'First Name field cannot be empty!'
         if len(postData['update_last_name']) == 0:
             errors['update_last_name'] = 'Last Name field cannot be empty!'
-        if not EMAIL_REGEX.match(postData['update_email']):
-            errors['update_email'] = 'Invalid Email'
+        if len(postData['email'])<1:
+            errors['email'] = "Username is required"
+        # if len(User.objects.filter(email = postData['email'])) > 0:
+        #     errors['email_exists'] = "Email Already Exists!"
         return errors
 
     def update_pw_validator(self,postData):
@@ -90,7 +92,7 @@ class User(models.Model):
     last_name = models.CharField(max_length =255)
     email = models.CharField(max_length = 255)
     password = models.CharField(max_length = 255)
-    birthday = models.DateField()
+    # birthday = models.DateField()
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     objects = UserManager()

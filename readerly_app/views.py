@@ -24,7 +24,7 @@ def register(request):
             first_name = request.POST['first_name'].lower(),
             last_name = request.POST['last_name'].lower(),
             email = request.POST['email'].lower(),
-            birthday = request.POST['birthday'],
+            # birthday = request.POST['birthday'],
             password = pw_hash)
         request.session['userid'] = logged_user.id
         return redirect('/dashboard')

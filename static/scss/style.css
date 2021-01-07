@@ -47,4 +47,20 @@ button {
   .dark_mode a {
     color: #ced4da; }
 
+* {
+  color: whitesmoke; }
+
+body a {
+  color: #ffddd2; }
+
+#viewerCanvas {
+  text-align: center;
+  display: none; }
+
+#hide {
+  display: none; }
+
+.author {
+  list-style-type: none; }
+
 /*# sourceMappingURL=style.css.map */
