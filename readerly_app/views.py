@@ -12,6 +12,11 @@ def index(request):
     }
     return render(request,'index.html',context)
 
+def guest(request):
+    user = User.objects.filter(email = 'guest')
+    request.session['userid'] = user[0].id
+    return(redirect('/dashboard'))
+
 def register(request):
     errors = User.objects.validator(request.POST)
     if len (errors) > 0:

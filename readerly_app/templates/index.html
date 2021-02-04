@@ -21,6 +21,7 @@
             <img id="logo" src="{% static 'img/navy_logo.png' %}" alt="Readerly Logo">
         </div>
         <div id="register">
+            
             {% if messages %}
             <div class='messages mt-3'>
                 {% for message in messages %}
@@ -30,8 +31,9 @@
             {% endif %}
             <div>
                 <p>New to Readerly?</p>
+                <a href = '/guest' class = 'btn btn-secondary'>Click to demo</a>
                 <h1>Register here</h1>
-
+                
                 <form action='/register' method='post'>
                     {% csrf_token %}
                     <div class="form-group">
