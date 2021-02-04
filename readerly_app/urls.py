@@ -20,4 +20,5 @@ urlpatterns = [
     path('update_account', views.update_account),
     path('update_password', views.update_password),
     path('book_info/<int:book_id>',views.book_info),
+    path('guest',views.guest),
 ]
