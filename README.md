@@ -22,4 +22,4 @@ We had great communication and checked in with each other regularly to keep to o
 We explored APIs, password validation, how to incorporate multiple apps in our Django project, and how to create a webscraper. We also learned how to collaborate as a team on Github and how to deploy our site to a specific domain.
 
 ## Built With
-Javascript, HTML, CSS, Python, Django
+Javascript, HTML, CSS, SASS, Python, Django
